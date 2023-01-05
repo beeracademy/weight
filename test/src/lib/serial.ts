@@ -1,3 +1,7 @@
+// Modified version of https://github.com/webusb/arduino/blob/gh-pages/demos/serial.js with
+// - TypeScript
+// - Await/Async
+
 export class Port {
   private interfaceNumber = 2; // original interface number of WebUSB Arduino demo
   private endpointIn = 5; // original in endpoint ID of WebUSB Arduino demo
