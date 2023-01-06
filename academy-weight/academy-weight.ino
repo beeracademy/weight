@@ -11,9 +11,6 @@ constexpr int BUTTON_PIN = 7;
 constexpr int LOADCELL_DOUT_PIN = 20;
 constexpr int LOADCELL_SCK_PIN = 21;
 
-constexpr long LOADCELL_OFFSET = 50682624;
-constexpr long LOADCELL_DIVIDER = 5895655;
-
 HX711 loadcell;
 
 #define Serial WebUSBSerial
@@ -40,8 +37,6 @@ void setup() {
   Serial.begin(9600);
 
   loadcell.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-  //loadcell.set_scale(LOADCELL_DIVIDER);
-  //loadcell.set_offset(LOADCELL_OFFSET);
 }
 
 void loop() {
