@@ -59,30 +59,39 @@
   }
 
   $: setColor(color);
+
+  let webUsbSupported = navigator.usb !== undefined;
 </script>
 
 <main>
   <h1>Academy Weight Test</h1>
 
-  {#if !connected}
-    <button on:click={connect}>Connect Weight</button>
+  {#if webUsbSupported}
+    {#if !connected}
+      <button on:click={connect}>Connect Weight</button>
+    {:else}
+      <h2>LED color</h2>
+      {#each Object.entries(LedColor) as [name, value]}
+        <label>
+          <input type="radio" bind:group={color} {value} />
+          {name}
+        </label>
+      {/each}
+      <br />
+      <p>
+        Button pressed: {buttonPressed ? "✅" : "❌"}
+      </p>
+      <p>
+        Weight reading: {weightValue}
+      </p>
+      <br />
+      <button on:click={disconnect}>Disconnect Weight</button>
+    {/if}
   {:else}
-    <h2>LED color</h2>
-    {#each Object.entries(LedColor) as [name, value]}
-      <label>
-        <input type="radio" bind:group={color} {value} />
-        {name}
-      </label>
-    {/each}
-    <br />
     <p>
-      Button pressed: {buttonPressed? "✅": "❌"}
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/USB">WebUSB</a> is
+      not supported in your browser. Try opening the page in Chrome.
     </p>
-    <p>
-      Weight reading: {weightValue}
-    </p>
-    <br />
-    <button on:click={disconnect}>Disconnect Weight</button>
   {/if}
 </main>
 
