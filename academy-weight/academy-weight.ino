@@ -50,7 +50,7 @@ void loop() {
         case GREEN:
         case RED:
         case YELLOW:
-          set_led_color(v);
+          set_led_color(static_cast<LedColor>(v));
           break;
         default:
           break;
